@@ -11,6 +11,11 @@
 #Write-Output "#1: Outputing Services that are running" | Out-File report.txt
 #Get-Service | Where-Object Status -eq 'Running' | Out-File report.txt -Append
 
-#Repeat the above 3 lines for the all of the commands project 1
-Get-Service | Where-Object Status -eq 'Running' | Out-File report.txt -Append
-Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object Name, Version, Build | Out-File report.txt -Append 
+#Repeat the above 3 lines for the all of the commands project
+ {
+    [Parameter(Mandatory=$True)]
+    [String] $computername,
+
+    [int]$drivetype = 3
+    }
+Get-CimInstance -ClassName Win32_OperatingSystem -ComputerName Server1 | Select-Object Name, Version, Build | Out-File report.txt -Append 
