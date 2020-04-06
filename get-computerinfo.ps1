@@ -1,6 +1,6 @@
 #Kala Taylor
 #Tuesday Night
-#Description of Project
+#Intro into scripting
 
 #For each command you have the following 3 lines:
 #1 is a comment line in your script that provides information about what your script is doing.  Example: "1. Outputing information about installed hotfixes"
@@ -12,10 +12,10 @@
 #Get-Service | Where-Object Status -eq 'Running' | Out-File report.txt -Append
 
 #Repeat the above 3 lines for the all of the commands project
- {
-    [Parameter(Mandatory=$True)]
-    [String] $computername,
+ [CmdletBinding()]
+ param (
+     [Parameter(Mandatory=$True)] $Computername = 'localhost' #First Parameter is mandatory 
+     
+ )
 
-    [int]$drivetype = 3
-    }
-Get-CimInstance -ClassName Win32_OperatingSystem -ComputerName Server1 | Select-Object Name, Version, Build | Out-File report.txt -Append 
+Get-CimInstance -ClassName Win32_OperatingSystem -ComputerName $Computername | Select-Object Name, Version, Build | Out-File report.txt -Append 
